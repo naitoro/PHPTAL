@@ -1222,7 +1222,9 @@ class PHPTAL
 
         // Prepending PHPTAL's autoloader helps if there are other autoloaders
         // that throw/die when file is not found. Only >5.3 though.
-        if (version_compare(PHP_VERSION, '5.3', '>=')) {
+        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
+            spl_autoload_register(array(__CLASS__,'autoload'), true, true);
+        } else if (version_compare(PHP_VERSION, '5.3', '>=')) {
             @spl_autoload_register(array(__CLASS__,'autoload'), false, true);
         } else {
             spl_autoload_register(array(__CLASS__,'autoload'));
